@@ -1,15 +1,22 @@
 # Run File as below- 
 
-$ find_port.py -h=host1
+$ find_hosts -ht='hostid'
 
-['57935', '8080']    //Thsese all port associated with host1          
+[ 'port1', 'port2', [], [], ]		//Thsese all port associated with host          
 
-$ find_host.py -p=01
+$ find_hosts -p=01
 
-['host89', 'host899', 'host3']    //these all host associated with port 01
+['host1', 'host2', 'host3..']		//these all host associated with port
 
 
-Here, for 'find_host.py, in input.json port 0 is assign to 'host3', 0 is not being store in redis db, if you put any other port value there script will run
+$ find_hosts -i=0.0.0.0
+
+['host1', 'host2', 'host3..']		//these all host associated with ip
+
+$ find_hosts -i=0.0.0.0 -p=01
+
+['host1', 'host2', 'host3..']    //these all host associated with ip & port
+
 
 
 
