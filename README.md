@@ -1,19 +1,15 @@
-If you run these above file you will get out-put like as below
+# Run File as below- 
 
-# gethost.py - Output
-For Port No: 2181, Host Ids is: ['host15']
+# find_port.py -h=host1
+['57935', '8080']          
 
-For Port No: 50896, Host Ids is: ['host148']
+# find_host.py -p=01
+['host89', 'host899', 'host3'] 
 
-For Port No: 443, Host Ids is: ['host17']
 
-# getport.py - Output
+Here, In input.json port 0 is assign to 'host3', 0 is not being store in redis db, if you put any other port value there script will run.
 
-For Host ID: host148, Port Nos is: set(['50896'])
 
-For Host ID: host15, Port Nos is: set(['633139', '63139', '8380'])
-
-For Host ID: host17, Port Nos is: set(['443'])
 
 
 
