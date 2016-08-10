@@ -1,9 +1,9 @@
 # Run File as below- 
 
-# find_port.py -h=host1
+find_port.py -h=host1
 ['57935', '8080']          
 
-# find_host.py -p=01
+find_host.py -p=01
 ['host89', 'host899', 'host3'] 
 
 
