@@ -38,7 +38,7 @@ def get_host(args):
 
 def main():
 
-    parser = argparse.ArgumentParser(description='Script retrieves schedules from a given server')
+    parser = argparse.ArgumentParser(description='Find Host')
     parser.add_argument('-p', '--port', type=str, help='Port no')
     args = parser.parse_args()
 
