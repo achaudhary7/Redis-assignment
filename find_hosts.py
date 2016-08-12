@@ -4,8 +4,6 @@ import redis
 import ast
 import sys
 import argparse
-
-
 r = redis.Redis(host='localhost', port=6379) #Initilize redis db
             
                                                         #This will return port no associated wil host id
@@ -22,13 +20,6 @@ def get_host(argsport):
     tolisthostname = list(hostname)
     return tolisthostname
 
-#This will return host no associated wil port id & ip address
-def get_iphost(args):
-    portno = format(args.port)
-    ip = format(args.ip)
-    hostname = r.sinter(portno, ip) 
-    tolisthostname = list(hostname)
-    return tolisthostname
 
 #This will return host no associated wil Ip address
 def get_ihost(argsip): 
@@ -37,6 +28,17 @@ def get_ihost(argsip):
     hostname = r.smembers(argsip)
     tolisthostname = list(hostname)
     return tolisthostname
+
+
+#This will return host no associated wil port id & ip address
+def get_iphost(args):
+    portno = format(args.port)
+    ip = format(args.ip)
+    hostname = r.sinter(portno, ip)  #Perform intersection 
+    tolisthostname = list(hostname)
+    return tolisthostname
+
+
 
 
 
@@ -56,22 +58,27 @@ def main():
     argslen = len(sys.argv)
 
     if argslen == 2:
+        
         if args.port:
-            allhost = get_host(args.port)
-            print allhost
+            allhost = get_host(args.port) 
+            if allhost:
+                print allhost              # print all host id associated with port
 
         if args.host:
             allport = get_port(args.host)
-            print allport
+            if allport:
+                print allport       # print all port no associated with host
 
         if args.ip:
-            allhost = get_ihost(args.ip)
-            print allhost
+            allhost = get_ihost(args.ip) 
+            if allhost:
+                print allhost          # print all host id associated with host
 
     if args.port:
         if args.ip:
             alliphost = get_iphost(args)
-            print alliphost       
+            if alliphost:
+                print alliphost         # print all host id associated with ip & port
 
 
 
@@ -98,5 +105,3 @@ def insert():                               #This is the mail inser function
 
                
 if  __name__ =='__main__':main()
-
-
