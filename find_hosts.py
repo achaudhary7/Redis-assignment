@@ -5,7 +5,6 @@ import ast
 import sys
 import argparse
 
-__author__ = 'Anup Chaudhary'
 
 r = redis.Redis(host='localhost', port=6379) #Initilize redis db
             
