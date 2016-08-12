@@ -29,7 +29,7 @@ def insert():                               #This is the mail inser function
         ip = column['address']
         sip = str(ip)
         fip = format(ip)
-        sport = repr(portno)
+        sport = str(portno)
         r.sadd(sport, hostid)
         r.sadd(fip, hostid)
         r.sadd(hostid, portno)
@@ -48,7 +48,7 @@ def get_port(argshost):
 #This will return host no associated wil port id
 def get_host(argsport):
     r = redis.Redis(host='localhost', port=6379)
-    portno = format(argsport) #command line port no
+    portno = str(argsport) #command line port no
     hostname = r.smembers(portno)
     tolist = list(hostname)
     hostname = str(tolist)
@@ -59,7 +59,7 @@ def get_iphost(args):
     r = redis.Redis(host='localhost', port=6379)
     portno = format(args.port)
     ip = format(args.ip)
-    hostname = r.sinter(portno, ip)
+    hostname = r.sinter(portno, ip) 
     tolist = list(hostname)
     hostname = str(tolist)
     return hostname
@@ -80,32 +80,24 @@ def get_ihost(argsip):
 def main():
 
     inserall= insert()
-    
     args =  parser.parse_args()
-    argshost =  str(args.host)
-    argsip =  str(args.ip)
-    argsport = str(args.port)
-    print args
-    if argshost == 'None':                    ## Get all host no associated with given port
-        if argsip == 'None':
-            allhost = get_host(argsport)
+    argslen = len(sys.argv)
+
+    if argslen == 2:
+        if args.port:
+            allhost = get_host(args.port)
             print allhost
 
-    if argsip != 'None':
-        if argsport != 'None':
-            alliphost = get_iphost(args)        ## Get all host no associated with given port & ip
-            print alliphost
-    
-    if argshost != 'None':
-        allport = get_port(argshost)            ## Get all port no associated with given host
-        print allport
+        if args.host:
+            allport = get_port(args.host)
+            print allport
 
-    if argshost == 'None':
-        if argsport == 'None':
-            allhost = get_ihost(argsip)            ## Get all port no associated with given host
+        if args.ip:
+            allhost = get_ihost(args.ip)
             print allhost
+
+    if args.port:
+        if args.ip:
+            alliphost = get_iphost(args)       
                
-
 if  __name__ =='__main__':main()
-
-
