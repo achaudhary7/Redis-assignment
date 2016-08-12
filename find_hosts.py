@@ -5,8 +5,8 @@ import ast
 import sys
 import argparse
 r = redis.Redis(host='localhost', port=6379) #Initilize redis db
-            
-                                                        #This will return port no associated wil host id
+                                                      
+#This will return port no associated wil host id                                                     
 def get_port(argshost):
     portno = r.smembers(argshost)
     portno = list(portno)
@@ -31,10 +31,6 @@ def get_iphost(args):
     hostname = r.sinter(args.port, args.ip)  #Perform intersection 
     tolisthostname = list(hostname)
     return tolisthostname
-
-
-
-
 
 
 def main():
@@ -74,8 +70,6 @@ def main():
             if alliphost:
                 print alliphost         # print all host id associated with ip & port
 
-
-
 def insert():                               #This is the mail inser function 
     readfile = open("input.json", "r")
     filedata = readfile.read()
@@ -96,8 +90,5 @@ def insert():                               #This is the mail inser function
         r.sadd(hostid, portno)
         key = key + 1
     return hostid
-
-               
+    
 if  __name__ =='__main__':main()
-
-
