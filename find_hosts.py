@@ -8,23 +8,19 @@ r = redis.Redis(host='localhost', port=6379) #Initilize redis db
             
                                                         #This will return port no associated wil host id
 def get_port(argshost):
-    hostid = format(argshost)
-    portno = r.smembers(hostid)
+    portno = r.smembers(argshost)
     portno = list(portno)
     return portno
 
 #This will return host no associated wil port id
 def get_host(argsport):
-    portno = str(argsport) #command line port no
-    hostname = r.smembers(portno)
+    hostname = r.smembers(argsport)
     tolisthostname = list(hostname)
     return tolisthostname
 
 
 #This will return host no associated wil Ip address
 def get_ihost(argsip): 
-    ip =  str(argsip)
-    sip = format(ip)
     hostname = r.smembers(argsip)
     tolisthostname = list(hostname)
     return tolisthostname
@@ -32,9 +28,7 @@ def get_ihost(argsip):
 
 #This will return host no associated wil port id & ip address
 def get_iphost(args):
-    portno = format(args.port)
-    ip = format(args.ip)
-    hostname = r.sinter(portno, ip)  #Perform intersection 
+    hostname = r.sinter(args.port, args.ip)  #Perform intersection 
     tolisthostname = list(hostname)
     return tolisthostname
 
@@ -105,3 +99,5 @@ def insert():                               #This is the mail inser function
 
                
 if  __name__ =='__main__':main()
+
+
