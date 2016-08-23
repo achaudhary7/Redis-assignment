@@ -1,7 +1,7 @@
 
 
 
-#Sets
+#Output
 We have used this commands to create sets different of elements, To add a member to a set you have to use the SADD command, 
 to remove a member we can use "SREM" command, to check if a member already exists the "SISMEMBER" command and to get the members of a set the "SMEMBERS" can be use.On Sets we can perform different operaions like UNION, Intersection ect.
 
